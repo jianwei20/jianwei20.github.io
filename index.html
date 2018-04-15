@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title  > 花蓮縣歷年人口統計表</title>
+  <title  > 台灣人口歷年增減統計表</title>
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.js"></script>
   <style type="text/css">
@@ -51,25 +51,39 @@
     padding: 10px;
     margin: 0 20px;
     color: black;
-    background-color:#ff9d6f;
+    background-color:#FF8888;
     border-style: solid;
     border-width: 2px;
     border-color: black;
 }
+.bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: -999;
+        }
+        .bg img {
+            min-height: 100%;
+            width: 100%;
+        }
 
   </style>
 
 </head>
 
 <body>
-  <body bgcolor="#FFDEA1">
-
-<H1 align="center">花蓮縣歷年人口統計表(依年份排序) </H1>
+  
+<div class="bg">
+        <img src="1.jpg">
+    </div>
+<H1 align="center">台灣出生死亡人口統計表 </H1>
 
 <div id ="button-container" align="center">
-     <button id="unit">總戶數 </button>
-     <button id="price">總人口數 </button>
-     <button id="unit_price">山地原住民人口數 </button>
+     <button id="unit">出生人口 </button>
+     <button id="price">死亡人口 </button>
+     <button id="unit_price"> 出生率成長</button>
 </div>
 
   <div id="content">
@@ -80,71 +94,60 @@
   
 
   var data = [
-  {
-    "region": "107",
-    "unit": 125871,
-    "price": 328853,
-    "unit_price": 36147
-  },
+  
   {
     "region": "106",
-    "unit": 125936,
-    "price": 329237,
-    "unit_price": 36126
+    "unit": 193844,
+    "price": 157405,
+    "unit_price": -14596
   },
   {
     "region": "105",
-    "unit": 125361,
-    "price": 330911,
-    "unit_price": 35989
+    "unit": 208440,
+    "price": 172405,
+    "unit_price": -5158
   },
   {
     "region": "104",
-    "unit": 124956,
-    "price": 331945,
-    "unit_price": 35690
+    "unit": 213598,
+    "price": 163858,
+    "unit_price":-3215
   },
   {
     "region": "103",
-    "unit": 124243,
-    "price": 333392,
-    "unit_price": 35461
+    "unit": 210383,
+    "price": 163929,
+    "unit_price": 11250
   },
   {
     "region": "102",
-    "unit": 123440,
-    "price": 333897,
-    "unit_price": 35159
+    "unit": 199133,
+    "price": 155908,
+    "unit_price": -30348
   },
   {
     "region": "101",
-    "unit": 122651,
-    "price": 335190,
-    "unit_price": 35028
+    "unit": 229481,
+    "price": 154251,
+    "unit_price": 32854
   },
   {
     "region": "100",
-    "unit": 121833,
-    "price": 336838,
-    "unit_price": 34903
+    "unit": 196627,
+    "price": 152915,
+    "unit_price": 29741
   },
   {
     "region": "99",
-    "unit": 120903,
-    "price": 338805,
-    "unit_price": 34842
+    "unit": 166886,
+    "price": 145772,
+    "unit_price": -24424
   },
   {
     "region": "98",
-    "unit": 119916,
-    "price": 340964,
-    "unit_price": 34627
-  },
-  {
-    "region": "97",
-    "unit": 118073,
-    "price": 341433,
-    "unit_price": 35199
+    "unit": 191310,
+    "price":143582,
+    "unit_price": 0
   },
 ];
 
@@ -224,25 +227,25 @@
         // x 軸比例尺
         xScale = d3.scale.linear().domain([0, data.length]).range([0, width]);
         // y 軸比例尺 給繪製矩形用
-        yScale  = d3.scale.linear().domain([300000, 360000]).range([0, height]);
+        yScale  = d3.scale.linear().domain([0, 250000]).range([0, height]);
         // y 軸比例尺 2 繪製座標軸用
-        yScale2 = d3.scale.linear().domain([300000, 360000]).range([height, 0]);
+        yScale2 = d3.scale.linear().domain([0, 250000]).range([height, 0]);
       }
       else if( chartType === 'unit_price' ){
         // x 軸比例尺
         xScale = d3.scale.linear().domain([0, data.length]).range([0, width]);
         // y 軸比例尺 給繪製矩形用
-        yScale  = d3.scale.linear().domain([0, 50000]).range([0, height]);
+        yScale  = d3.scale.linear().domain([-40000, 40000]).range([0, height]);
         // y 軸比例尺 2 繪製座標軸用
-        yScale2 = d3.scale.linear().domain([0, 50000]).range([height, 0]);
+        yScale2 = d3.scale.linear().domain([-40000, 40000]).range([height, 0]);
       }
       else if( chartType === 'unit' ){
         // x 軸比例尺
         xScale = d3.scale.linear().domain([0, data.length]).range([0, width]);
         // y 軸比例尺 給繪製矩形用
-        yScale  = d3.scale.linear().domain([100000, 140000]).range([0, height]);
+        yScale  = d3.scale.linear().domain([0,250000]).range([0, height]);
         // y 軸比例尺 2 繪製座標軸用
-        yScale2 = d3.scale.linear().domain([100000, 140000 ]).range([height, 0]);
+        yScale2 = d3.scale.linear().domain([0,250000 ]).range([height, 0]);
       }
 
       // 座標軸重繪
@@ -264,13 +267,7 @@
 
 
       // 資料排序, 透過 d3.descending 或 d3.ascending 來決定排序方式
-      data.sort(function(a, b){
-        // 降冪
-        // return d3.descending(a[chartType], b[chartType]);
-
-        // 升冪
-        return d3.ascending(a[chartType], b[chartType]);
-      });
+      
 
       // 產生長條圖
       svg.selectAll('.bar')
@@ -306,13 +303,9 @@
 
   });
 
-
-
   
 
 
   </script>
-  <div style="letter-spacing:15px;" align="center">97  98  99  100  101  102  103  104  105  106  107</div>
- 
 </body>
 </html>
