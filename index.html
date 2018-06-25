@@ -1,1 +1,817 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>A Pen by  Jack Lin</title>
+  
+  
+  
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+    
+  <body bgcolor="#d2e9ff">
+  <head>
+ <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+ <script type="text/javascript" src="topojson.v1.min.js" charset="big5"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+ </head>
+<body>
+    <img src="img/1.png"width="150px;">
+  <ul class="drop-down-menu">
+
+        <li><a href="#">西區八強</a>
+            <ul>
+                <li><a href="#" onclick = "chooseteam('Rocket')">火箭</a>
+                </li>
+                <li><a href="#" onclick = "chooseteam('Worriors')">勇士</a>
+                </li>
+                <li><a href="#" onclick = "chooseteam('Blazers')">拓荒者</a>
+                </li>
+                <li><a href="#" onclick = "chooseteam('Thunder')">雷霆</a>
+                </li>
+                <li><a href="#" onclick = "chooseteam('Jazz')">爵士</a>
+                </li>
+                <li><a href="#" onclick = "chooseteam('Pelicans')">鵜鶘</a>
+                </li>
+                <li><a href="#" onclick = "chooseteam('Spurs')">馬刺</a>
+                </li>
+                <li><a href="#" onclick = "chooseteam('Wolves')">灰狼</a>
+                </li>
+            </ul>
+        </li> 
+        <li><a href="#">東區八強</a>
+            <ul>
+                <li><a href="#" onclick = "chooseteam('Raptors')">暴龍</a>
+                </li>
+                <li><a href="#" onclick = "chooseteam('Celtics')">賽爾提克</a>
+                </li>
+                <li><a href="#" onclick = "chooseteam('76ers')">七六人</a>
+                </li>
+                <li><a href="#" onclick = "chooseteam('Cavaliers')">騎士</a>
+                </li>
+                <li><a href="#" onclick = "chooseteam('Pacers')">溜馬</a>
+                </li>
+                <li><a href="#" onclick = "chooseteam('Heat')">熱火</a>
+                </li>
+                <li><a href="#" onclick = "chooseteam('Bucks')">公鹿</a>
+                </li>
+                <li><a href="#" onclick = "chooseteam('Wizards')">巫師</a>
+                </li>
+                
+            </ul>
+        </li> 
+</ul>
+<br>
+  </body>
+<script>
+var svg = d3.select("body")
+.append("svg")
+var TD = [
+{
+team:"Rocket",
+area:"west",
+rdaim:114,
+rdmade:56,
+rdav:49.1, 
+mdaim :649,
+mdmade :353,
+mdav:54.4,
+ldaim:126,
+ldmade:53,
+ldav:42.1,
+ruaim:167,
+rumade:43,
+ruav:25.7,
+muaim:179,
+mumade:61,
+muav:34.1,
+luaim:212,
+lumade:66,
+luav:31.1
+},
+{
+team:"Worriors",
+area:"west",
+rdaim:199,
+rdmade:80,
+rdav:40.2,
+mdaim:712,
+mdmade:430,
+mdav:60.4,
+ldaim:195,
+ldmade:87,
+ldav:44.6,
+ruaim:146,
+rumade:94,
+ruav:64.4,
+muaim:171,
+mumade:61,
+muav:35.7,
+luaim:278,
+lumade:113,
+luav:40.6
+},
+{
+team:"Blazers",
+area:"west",
+rdaim:35,
+rdmade:10,
+rdav:28.6,
+mdaim:176,
+mdmade:102,
+mdav:57.4,
+ldaim:33,
+ldmade:13,
+ldav:39.4,
+ruaim:42,
+rumade:17,
+ruav:40.5,
+muaim:38,
+mumade:8,
+muav:21.1,
+luaim:38,
+lumade:15,
+luav:39.5
+},
+{
+team:"Thunder",
+area:"west",
+rdaim:54,
+rdmade:19,
+rdav:35.2,
+mdaim:229,
+mdmade:115,
+mdav:50,
+ldaim:45,
+ldmade:23,
+ldav:51.1,
+ruaim:58,
+rumade:18,
+ruav:31,
+muaim:57,
+mumade:17,
+muav:29.8,
+luaim:73,
+lumade:31,
+luav:42.5
+},
+{
+team:"Jazz",
+area:"west",
+rdaim:71,
+rdmade:28,
+rdav:39.4,
+mdaim:479,
+mdmade:258,
+mdav:53.9,
+ldaim:75,
+ldmade:33,
+ldav:44,
+ruaim:101,
+rumade:32,
+ruav:31.7,
+muaim:81,
+mumade:22,
+muav:27.2,
+luaim:101,
+lumade:42,
+luav:41.6
+},
+{
+team:"Pelicans",
+area:"west",
+rdaim:72,
+rdmade:22,
+rdav:30.6,
+mdaim:404,
+mdmade:240,
+mdav:59.4,
+ldaim:60,
+ldmade:20,
+ldav:33.3,
+ruaim:109,
+rumade:35,
+ruav:32.1,
+muaim:67,
+mumade:25,
+muav:37.3,
+luaim:92,
+lumade:43,
+luav:46.7
+},
+{
+team:"Spurs",
+area:"west",
+rdaim:59,
+rdmade:26,
+rdav:44.1,
+mdaim:168,
+mdmade:95,
+mdav:56.6,
+ldaim:34,
+ldmade:7,
+ldav:20.6,
+ruaim:53,
+rumade:13,
+ruav:24.5,
+muaim:45,
+mumade:18,
+muav:40,
+luaim:56,
+lumade:14,
+luav:25
+},
+{
+team:"Wolves",
+area:"west",
+rdaim:42,
+rdmade:12,
+rdav:28.6,
+mdaim:230,
+mdmade:121,
+mdav:52.6,
+ldaim:37,
+ldmade:17,
+ldav:45.9,
+ruaim:35,
+rumade:13,
+ruav:37.1,
+muaim:36,
+mumade:13,
+muav:36.1,
+luaim:32,
+lumade:14,
+luav:43.8
+},
+{team:"Raptors", area:"east", rdaim: 59, rdmade:23, rdav:38.9, mdaim :441, mdmade :244, mdav:55.3, ldaim:74, ldmade:28, ldav:37.8, ruaim:74, rumade:28, ruav:37.8, muaim:80, mumade:32, muav:40, luaim:84, lumade:29, luav:34.5 },
+{ team:"Celtics", area:"east", rdaim: 139, rdmade:49, rdav:35.2, mdaim :731, mdmade :388, mdav:53, ldaim:133, ldmade:55, ldav:41.3, ruaim:186, rumade:62, ruav:33.3, muaim:161, mumade:65, muav:40.3, luaim:230, lumade:73, luav:31.7 },
+{ team:"76ers", area:"east", rdaim: 54, rdmade:11, rdav:20.3, mdaim :438, mdmade :231, mdav:52.7, ldaim:66, ldmade:32, ldav:48.4, ruaim:110, rumade:39, ruav:35.4, muaim:105, mumade:37, muav:35.2, luaim:111, lumade:37, luav:33.3 },
+{ team:"Cavaliers", area:"east", rdaim: 208, rdmade:78, rdav:37.5, mdaim :778, mdmade :454, mdav:58.3, ldaim:189, ldmade:72, ldav:38, ruaim:277, rumade:89, ruav:32.1, muaim:143, mumade:51, muav:35.6, luaim:199, lumade:66, luav:33.1 },
+{ team:"Pacers", area:"east", rdaim: 51, rdmade:15, rdav:29.4, mdaim :264, mdmade :164, mdav:62.1, ldaim:48, ldmade:20, ldav:41.6, ruaim:57, rumade:17, ruav:29.8, muaim:53, mumade:20, muav:37.7, luaim:85, lumade:31, luav:36.4 },
+{ team:"Heat", area:"east", rdaim: 46, rdmade:18, rdav:39.1, mdaim :191, mdmade :178, mdav:93.1, ldaim:189, ldmade:72, ldav:38, ruaim:52, rumade:20, ruav:38.4, muaim:25, mumade:13, muav:52, luaim:66, lumade:23, luav:34.8 },
+{ team:"Bucks", area:"east", rdaim: 53, rdmade:23, rdav:43.3, mdaim :256, mdmade :156, mdav:60, ldaim:64, ldmade:17, ldav:26.5, ruaim:61, rumade:24, ruav:39.3, muaim:44, mumade:17, muav:38.6, luaim:70, lumade:27, luav:38.5 },
+{ team:"Wizards", area:"east", rdaim: 54, rdmade:24, rdav:44.4, mdaim :230, mdmade :141, mdav:61.3, ldaim:49, ldmade:18, ldav:36.7, ruaim:55, rumade:15, ruav:27.2, muaim:46, mumade:21, muav:45.6, luaim:46, lumade:21, luav:45.6 }
+];
+
+opts = {
+  // basketball hoop diameter (ft)
+  basketDiameter: 1.5,
+  // distance from baseline to backboard (ft)
+  basketProtrusionLength: 4,
+  // backboard width (ft)
+  basketWidth: 6,
+  // title of hexagon color legend
+  colorLegendTitle: 'Efficiency',
+  // label for starting of hexagon color range
+  colorLegendStartLabel: '< avg',
+  // label for ending of hexagon color range
+  colorLegendEndLabel: '> avg',
+  // full length of basketball court (ft)
+  courtLength: 94,
+  // full width of basketball court (ft)
+  courtWidth: 50,
+  // distance from baseline to free throw line (ft)
+  freeThrowLineLength: 19,
+  // radius of free throw line circle (ft)
+  freeThrowCircleRadius: 6,
+  // d3 scale for hexagon colors
+  heatScale: d3.scale.quantize()
+    .domain([0, 1])
+    .range(['#5458A2', '#6689BB', '#FADC97', '#F08460', '#B02B48']),
+  // height of svg
+  height: undefined,
+  // method of aggregating points into a bin
+  hexagonBin: function(point, bin) {
+    var attempts = point.attempts || 1;
+    var made = +point.made || 0;
+    bin.attempts = (bin.attempts || 0) + attempts;
+    bin.made = (bin.made || 0) + made;
+  },
+  // how many points does a bin need to be visualized
+  hexagonBinVisibleThreshold: 1,
+  // method to determine value to be used with specified heatScale
+  hexagonFillValue: function(d) {
+    return d.made / d.attempts;
+  },
+  // bin size with regards to courth width/height (ft)
+  hexagonRadius: 0.75,
+  // discrete hexagon size values that radius value is mapped to
+  hexagonRadiusSizes: [0, 0.4, 0.6, 0.75],
+  // how many points in a bin to consider it while building radius scale
+  hexagonRadiusThreshold: 2,
+  // method to determine radius value to be used in radius scale
+  hexagonRadiusValue: function(d) {
+    return d.attempts;
+  },
+  // width of key marks (dashes on side of the paint) (ft)
+  keyMarkWidth: 0.5,
+  // width the key (paint) (ft)
+  keyWidth: 16,
+  // radius of restricted circle (ft)
+  restrictedCircleRadius: 4,
+  // title of hexagon size legend
+  sizeLegendTitle: 'Frequency',
+  // label of start of hexagon size legend
+  sizeLegendSmallLabel: 'low',
+  // label of end of hexagon size legend
+  sizeLegendLargeLabel: 'high',
+  // distance from baseline where three point line because circular (ft)
+  threePointCutoffLength: 14,
+  // distance of three point line from basket (ft)
+  threePointRadius: 23.75,
+  // distance of corner three point line from basket (ft)
+  threePointSideRadius: 22,
+  // title of chart
+  title: 'Shot chart',
+  // method to determine x position of a bin on the court
+  translateX: function(d) {
+    return d.x;
+  },
+  // method to determine y position of a bin on the court
+  translateY: function(d) {
+    return this._visibleCourtLength - d.y;
+  },
+  // width of svg
+  width: 680
+}
+
+var o = opts
+
+calculateVisibleCourtLength = function() {
+  var halfCourtLength = o.courtLength / 2;
+  var threePointLength = o.threePointRadius +
+    o.basketProtrusionLength;
+  o.visibleCourtLength = threePointLength +
+    (halfCourtLength - threePointLength) / 2;
+}
+
+calculateVisibleCourtLength();
+
+// helper to create an arc path
+appendArcPath = function(base, radius, startAngle, endAngle) {
+  var points = 30;
+
+  var angle = d3.scale.linear()
+    .domain([0, points - 1])
+    .range([startAngle, endAngle]);
+
+  var line = d3.svg.line.radial()
+    .interpolate("basis")
+    .tension(0)
+    .radius(radius)
+    .angle(function(d, i) {
+      return angle(i);
+    });
+
+  return base.append("path").datum(d3.range(points))
+    .attr("d", line);
+}
+
+// draw basketball court
+var drawCourt = function() {
+  var base = d3.select("svg")
+    .attr('width', o.width)
+    .attr('viewBox', "0 0 " + o.courtWidth + " " + o.visibleCourtLength)
+    .append('g')
+    .attr('class', 'shot-chart-court');
+  if (o.height) base.attr('height', o.height);
+
+  base.append("rect")
+    .attr('class', 'shot-chart-court-key')
+    .attr("x", (o.courtWidth / 2 - o.keyWidth / 2))
+    .attr("y", (o.visibleCourtLength - o.freeThrowLineLength))
+    .attr("width", o.keyWidth)
+    .attr("height", o.freeThrowLineLength);
+
+  base.append("line")
+    .attr('class', 'shot-chart-court-baseline')
+    .attr("x1", 0)
+    .attr("y1", o.visibleCourtLength)
+    .attr("x2", o.courtWidth)
+    .attr("y2", o.visibleCourtLength);
+
+  var tpAngle = Math.atan(o.threePointSideRadius /
+    (o.threePointCutoffLength - o.basketProtrusionLength - o.basketDiameter / 2));
+  appendArcPath(base, o.threePointRadius, -1 * tpAngle, tpAngle)
+    .attr('class', 'shot-chart-court-3pt-line')
+    .attr("transform", "translate(" + (o.courtWidth / 2) + ", " +
+      (o.visibleCourtLength - o.basketProtrusionLength - o.basketDiameter / 2) +
+      ")");
+
+  [1, -1].forEach(function(n) {
+    base.append("line")
+      .attr('class', 'shot-chart-court-3pt-line')
+      .attr("x1", o.courtWidth / 2 + o.threePointSideRadius * n)
+      .attr("y1", o.visibleCourtLength - o.threePointCutoffLength)
+      .attr("x2", o.courtWidth / 2 + o.threePointSideRadius * n)
+      .attr("y2", o.visibleCourtLength);
+  });
+
+  appendArcPath(base, o.restrictedCircleRadius, -1 * Math.PI / 2, Math.PI / 2)
+    .attr('class', 'shot-chart-court-restricted-area')
+    .attr("transform", "translate(" + (o.courtWidth / 2) + ", " +
+      (o.visibleCourtLength - o.basketProtrusionLength - o.basketDiameter / 2) + ")");
+
+  appendArcPath(base, o.freeThrowCircleRadius, -1 * Math.PI / 2, Math.PI / 2)
+    .attr('class', 'shot-chart-court-ft-circle-top')
+    .attr("transform", "translate(" + (o.courtWidth / 2) + ", " +
+      (o.visibleCourtLength - o.freeThrowLineLength) + ")");
+
+  appendArcPath(base, o.freeThrowCircleRadius, Math.PI / 2, 1.5 * Math.PI)
+    .attr('class', 'shot-chart-court-ft-circle-bottom')
+    .attr("transform", "translate(" + (o.courtWidth / 2) + ", " +
+      (o.visibleCourtLength - o.freeThrowLineLength) + ")");
+
+  [7, 8, 11, 14].forEach(function(mark) {
+    [1, -1].forEach(function(n) {
+      base.append("line")
+        .attr('class', 'shot-chart-court-key-mark')
+        .attr("x1", o.courtWidth / 2 + o.keyWidth / 2 * n + o.keyMarkWidth * n)
+        .attr("y1", o.visibleCourtLength - mark)
+        .attr("x2", o.courtWidth / 2 + o.keyWidth / 2 * n)
+        .attr("y2", o.visibleCourtLength - mark)
+    });
+  });
+
+  base.append("line")
+    .attr('class', 'shot-chart-court-backboard')
+    .attr("x1", o.courtWidth / 2 - o.basketWidth / 2)
+    .attr("y1", o.visibleCourtLength - o.basketProtrusionLength)
+    .attr("x2", o.courtWidth / 2 + o.basketWidth / 2)
+    .attr("y2", o.visibleCourtLength - o.basketProtrusionLength)
+
+  base.append("circle")
+    .attr('class', 'shot-chart-court-hoop')
+    .attr("cx", o.courtWidth / 2)
+    .attr("cy", o.visibleCourtLength - o.basketProtrusionLength - o.basketDiameter / 2)
+    .attr("r", o.basketDiameter / 2)
+
+}
+drawCourt();
+
+var svg =  d3.select("svg")
+
+	svg.append("rect")
+    	.attr("class", "leftup")
+    	.attr("x", "0")
+    	.attr("y", "0")
+    	.attr("opacity","0.1")
+    	.style({
+      	width: 17,
+      	height: 18.4,
+        stroke:'black',
+        'stroke-width': 0
+    	});
+  svg.append("rect")
+    	.attr("class", "middleup")
+    	.attr("x", "17")
+    	.attr("y", "0")
+    	.attr("opacity","0.1")
+    	.style({
+      	width: 16,
+      	height: 18.4,
+         stroke:'black',
+        'stroke-width': 0
+    	});
+  svg.append("rect")
+    	.attr("class", "rightup")
+    	.attr("x", "33")
+    	.attr("y", "0")
+    	.attr("opacity","0.1")
+    	.style({
+      	width: 17,
+      	height: 18.4,
+        stroke:'black',
+        'stroke-width': 0
+    	});
+    svg.append("rect")
+    	.attr("class", "leftdown")
+    	.attr("x", "0")
+    	.attr("y", "18.4")
+    	.attr("opacity","0.1")
+    	.style({
+      	width: 17,
+      	height: 19.6,
+        stroke:'black',
+        'stroke-width': 0
+    	});
+   svg.append("rect")
+    	.attr("class", "middledown")
+    	.attr("x", "17")
+    	.attr("y", "18.4")
+    	.attr("opacity","0.1")
+    	.style({
+      	width: 16,
+      	height: 19.6,
+        stroke:'black',
+        'stroke-width': 0
+    	});
+  svg.append("rect")
+    	.attr("class", "rightdown")
+    	.attr("x", "33")
+    	.attr("y", "18.4")
+    	.attr("opacity","0.1")
+    	.style({
+      	width: 17,
+      	height: 19.6,
+        stroke:'black',
+        'stroke-width': 0
+    	});
+  svg.append("circle")
+  		.attr("class","pg")
+      .attr("cx","14")
+      .attr("cy","18")
+      .attr("opacity","0")
+      .attr("r","1.5")
+      .attr("fill","#000000");
+      svg.append("circle")
+  		.attr("class","sg")
+      .attr("cx","25")
+      .attr("cy","20")
+      .attr("opacity","0")
+      .attr("r","1.5")
+      .attr("fill","#000000");
+      svg.append("circle")
+  		.attr("class","sf")
+      .attr("cx","36")
+      .attr("cy","18")
+      .attr("opacity","0")
+      .attr("r","1.5")
+      .attr("fill","#000000");
+      svg.append("circle")
+  		.attr("class","pf")
+      .attr("cx","25")
+      .attr("cy","10")
+      .attr("opacity","0")
+      .attr("r","1.5")
+      .attr("fill","#000000");
+      svg.append("circle")
+  		.attr("class","c")
+      .attr("cx","25")
+      .attr("cy","30")
+      .attr("opacity","0")
+      .attr("r","1.5")
+      .attr("fill","#000000");
+      
+      function two_three(){
+      d3.select(".pg")
+      .transition()
+      .attr("cx","16")
+      .attr("cy","12")
+      .attr("opacity","1");
+      d3.select(".sg")
+      .transition()
+      .attr("cx","25")
+      .attr("cy","30")
+      .attr("opacity","1");
+      d3.select(".sf")
+      .transition()
+      .attr("cx","34")
+      .attr("cy","12")
+      .attr("opacity","1");
+      d3.select(".pf")
+      .transition()
+      .attr("cx","10")
+      .attr("cy","30")
+      .attr("opacity","1");
+      d3.select(".c")
+      .transition()
+      .attr("cx","40")
+      .attr("cy","30")
+      .attr("opacity","1");
+      }
+      function three_two(){
+      d3.select(".pg")
+      .transition()
+      .attr("cx","10")
+      .attr("cy","15")
+      .attr("opacity","1");
+      d3.select(".sg")
+      .transition()
+      .attr("cx","25")
+      .attr("cy","10")
+      .attr("opacity","1");
+      d3.select(".sf")
+      .transition()
+      .attr("cx","40")
+      .attr("cy","15")
+      .attr("opacity","1");
+      d3.select(".pf")
+      .transition()
+      .attr("cx","15")
+      .attr("cy","30")
+      .attr("opacity","1");
+      d3.select(".c")
+      .transition()
+      .attr("cx","35")
+      .attr("cy","30")
+      .attr("opacity","1");
+      }
+      function two_one_two(){
+      d3.select(".pg")
+      .transition()
+      .attr("cx","16")
+      .attr("cy","12")
+      .attr("opacity","1");
+      d3.select(".sg")
+      .transition()
+      .attr("cx","25")
+      .attr("cy","20")
+      .attr("opacity","1");
+      d3.select(".sf")
+      .transition()
+      .attr("cx","34")
+      .attr("cy","12")
+      .attr("opacity","1");
+      d3.select(".pf")
+      .transition()
+      .attr("cx","14")
+      .attr("cy","30")
+      .attr("opacity","1");
+      d3.select(".c")
+      .transition()
+      .attr("cx","36")
+      .attr("cy","30")
+      .attr("opacity","1");
+      }
+      function one_three_one(){
+      d3.select(".pg")
+      .transition()
+      .attr("cx","14")
+      .attr("cy","18")
+      .attr("opacity","1");
+      d3.select(".sg")
+      .transition()
+      .attr("cx","25")
+      .attr("cy","20")
+      .attr("opacity","1");
+      d3.select(".sf")
+      .transition()
+      .attr("cx","36")
+      .attr("cy","18")
+      .attr("opacity","1");
+      d3.select(".pf")
+      .transition()
+      .attr("cx","25")
+      .attr("cy","10")
+      .attr("opacity","1");
+      d3.select(".c")
+      .transition()
+      .attr("cx","25")
+      .attr("cy","30")
+      .attr("opacity","1");
+      }
+      function chooseteam(name){
+      
+      for( var i = 0; i < TD.length; i++ ){
+      if( TD[i].team == name ){
+         if( name == "Rocket" ){
+          document.getElementById("image").src = "img/44.png";
+         two_three();
+         }else if( name == "Worriors" ){
+          document.getElementById("image").src = "img/33.png";
+         two_three();
+         }else if( name == "Blazers" ){
+          document.getElementById("image").src = "img/55.png";
+         one_three_one();
+         }else if( name == "Thunder" ){
+          document.getElementById("image").src = "img/66.png";
+         two_three();
+         }else if( name == "Jazz" ){
+          document.getElementById("image").src = "img/77.png";
+         two_one_two();
+         }else if( name == "Pelicans" ){
+          document.getElementById("image").src = "img/88.png";
+         one_three_one();
+         }else if( name == "Spurs" ){
+          document.getElementById("image").src = "img/99.png";
+         one_three_one();
+         }else if( name == "Wolves" ){
+          document.getElementById("image").src = "img/1010.jpg";
+         two_three();
+         }else if( name == "Raptors" ){
+          document.getElementById("image").src = "img/tor.png";
+         one_three_one();
+         }else if( name == "Celtics" ){
+          document.getElementById("image").src = "img/bos.png";
+         one_three_one();
+         }else if( name == "76ers" ){
+          document.getElementById("image").src = "img/phi.png";
+         one_three_one();
+         }else if( name == "Cavaliers" ){
+          document.getElementById("image").src = "img/cle.png";
+         one_three_one();
+         }else if( name == "Pacers" ){
+          document.getElementById("image").src = "img/pace.png";
+         one_three_one();
+         }else if( name == "Heats" ){
+          document.getElementById("image").src = "img/11111.jpg";
+         one_three_one();
+         }else if( name == "Bucks" ){
+          document.getElementById("image").src = "img/yy.png";
+         one_three_one();
+         }else if( name == "Wizards" ){
+          document.getElementById("image").src = "img/was.png";
+         three_two();
+         }
+         svg.select(".rightdown")
+         .transition()
+         .attr({fill: function(d){
+         if(TD[i].rdav >= 40){ return "#880000"; }
+         else if(TD[i].rdav < 40 ){ return "#0088A8"; }
+         } 
+         })
+         .attr({opacity: function(d){
+         var c = d3.scale.linear()
+         .domain([20,40,60])
+         .range([0.7,0.3,0.7]);
+         return c(TD[i].rdav);
+         }
+         });
+         svg.select(".middledown")
+         .transition()
+         .attr({fill: function(d){
+         if(TD[i].mdav >= 40){ return "#880000"; }
+         else if(TD[i].mdav < 40 ){ return "#0088A8"; }
+         } 
+         })
+         .attr({opacity: function(d){
+         var c = d3.scale.linear()
+         .domain([20,40,90])
+         .range([0.7,0.3,0.8]);
+         return c(TD[i].mdav);
+         }
+         });
+         svg.select(".leftdown")
+         .transition()
+         .attr({fill: function(d){
+         if(TD[i].ldav >= 40){ return "#880000"; }
+         else if(TD[i].ldav < 40 ){ return "#0088A8"; }
+         } 
+         })
+         .attr({opacity: function(d){
+         var c = d3.scale.linear()
+         .domain([20,40,60])
+         .range([0.7,0.3,0.7]);
+         return c(TD[i].ldav);
+         }
+         });
+         svg.select(".rightup")
+         .transition()
+         .attr({fill: function(d){
+         if(TD[i].ruav >= 40){ return "#880000"; }
+         else if(TD[i].ruav < 40 ){ return "#0088A8"; }
+         } 
+         })
+         .attr({opacity: function(d){
+         var c = d3.scale.linear()
+         .domain([20,40,60])
+         .range([0.7,0.3,0.7]);
+         return c(TD[i].ruav);
+         }
+         });
+         svg.select(".middleup")
+         .transition()
+         .attr({fill: function(d){
+         if(TD[i].muav >= 40){ return "#880000"; }
+         else if(TD[i].muav < 40 ){ return "#0088A8"; }
+         } 
+         })
+         .attr({opacity: function(d){
+         var c = d3.scale.linear()
+         .domain([20,40,60])
+         .range([0.7,0.3,0.7]);
+         return c(TD[i].muav);
+         }
+         });
+         svg.select(".leftup")
+         .transition()
+         .attr({fill: function(d){
+         if(TD[i].luav >= 40){ return "#880000"; }
+         else if(TD[i].luav < 40 ){ return "#0088A8"; }
+         } 
+         })
+         .attr({opacity: function(d){
+         var c = d3.scale.linear()
+         .domain([20,40,60])
+         .range([0.7,0.3,0.7]);
+         return c(TD[i].luav);
+         }
+         });
+      }
+      }
+      }
+</script>
+ <img id="image" src="img/2.jpg"width="200px;"> 
+ <br>
+ <td align="center">NBA 防守分析站位推薦圖示</td>
+  
+
+</body>
+
+</html>
